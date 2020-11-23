@@ -45,6 +45,7 @@ const char DWIN_TFT_GCODE_M502[] PROGMEM = "M502";
 const char DWIN_TFT_GCODE_M600[] PROGMEM = "M600";
 const char DWIN_TFT_GCODE_MESH_START[] PROGMEM = "G29 S1";
 const char DWIN_TFT_GCODE_MESH_NEXT[] PROGMEM = "G29 S2";
+const char DWIN_TFT_GCODE_MESH_CANCEL[] PROGMEM = "G29 S5";
 const char DWIN_TFT_GCODE_RETR_1[] PROGMEM = "G91\nG1 E-1 F1800\nG90";
 const char DWIN_TFT_GCODE_RETR_3[] PROGMEM = "G1 E-3 F1800";
 const char DWIN_TFT_GCODE_HOTEND_PID[] PROGMEM = "M106 S204\nM303 E0 S210 C15 U1";
@@ -90,8 +91,11 @@ public:
   void playInfoTone();
   void playSuccessTone();
   void playErrorTone();
+  void nextLevellingAssistPoint();
+  void stopLevellingAssist();
 
 private:
+  bool leveling;
   void receiveCommands();
   void loop();
   void checkPowerOff();

@@ -154,6 +154,7 @@ private:
   void handleResetMainboard();
   void handleAutoPowerOff();
   void handleSetCaseLight();
+  void handleLevelingAssist();
 };
 
 extern DwinTFTCommandClass DwinTFTCommand;

@@ -89,12 +89,19 @@ void GcodeSuite::G29() {
       mbl.reset();
       mbl_probe_index = 0;
       if (!ui.wait_for_move) {
-        queue.inject_P(PSTR("G28\nG29 S2"));
+        if (axis_unhomed_error()) {
+          queue.inject_P(PSTR("G28"));
+        }
+        queue.inject_P(PSTR("G29 S2"));
         return;
       }
       state = MeshNext;
 
     case MeshNext:
+      if (axis_unhomed_error()) {
+        return;
+      }
+
       if (mbl_probe_index < 0) {
         SERIAL_ECHOLNPGM("Start mesh probing with \"G29 S1\" first.");
         return;
@@ -125,6 +132,10 @@ void GcodeSuite::G29() {
 
         mbl.zigzag(mbl_probe_index++, ix, iy);
         _manual_goto_xy({ mbl.index_to_xpos[ix], mbl.index_to_ypos[iy] });
+
+        if (mbl_probe_index == GRID_MAX_POINTS) {
+          mbl_probe_index = 0;
+        }
       }
       else {
         // One last "return to the bed" (as originally coded) at completion
@@ -195,6 +206,7 @@ void GcodeSuite::G29() {
 
     case MeshReset:
       reset_bed_level();
+      queue.inject_P(PSTR("G28"));
       break;
 
   } // switch(state)

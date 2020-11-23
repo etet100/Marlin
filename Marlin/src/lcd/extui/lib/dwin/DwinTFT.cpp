@@ -115,6 +115,8 @@ void DwinTFTClass::init()
     playTone(250, NOTE_C5);
     playTone(500, NOTE_G5);
   #endif
+
+  leveling = false;
 }
 
 void DwinTFTClass::kill()
@@ -343,6 +345,22 @@ void DwinTFTClass::playErrorTone()
   playTone(250, NOTE_G5);
   playTone(250, NOTE_C5);
   playTone(500, NOTE_G5);
+}
+
+void DwinTFTClass::nextLevellingAssistPoint()
+{
+  if (leveling) {
+    gcodeQueue_P(DWIN_TFT_GCODE_MESH_NEXT);
+  } else {
+    gcodeQueue_P(DWIN_TFT_GCODE_MESH_START);
+    leveling = true;
+  }
+}
+
+void DwinTFTClass::stopLevellingAssist()
+{
+  gcodeQueue_P(DWIN_TFT_GCODE_MESH_CANCEL);
+  leveling = false;
 }
 
 #endif

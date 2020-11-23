@@ -152,6 +152,9 @@ void DwinTFTCommandClass::handleCommand(DwinTFTCommandsRx command)
     case DWIN_TFT_RX_SET_CASE_LED: // 4max pro led strip
       handleSetCaseLight();
       break;
+    case DWIN_TFT_RX_LEVELING_ASSIST: 
+      handleLevelingAssist();
+      break;
     default:
       break;
   }
@@ -213,6 +216,16 @@ void DwinTFTCommandClass::loop()
     TFTbuflen = (TFTbuflen - 1);
     TFTbufindr = (TFTbufindr + 1) % DWIN_TFT_BUFSIZE;
   }
+}
+
+void DwinTFTCommandClass::handleLevelingAssist()
+{
+    if(codeSeen('L')) {
+        DwinTFT.stopLevellingAssist();
+    } else
+    if(codeSeen('H') || codeSeen('I') || codeSeen('J') || codeSeen('K')) {
+        DwinTFT.nextLevellingAssistPoint();
+    }    
 }
 
 void DwinTFTCommandClass::handleGetHotendTemp()
