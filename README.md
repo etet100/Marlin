@@ -1,4 +1,4 @@
-# Marlin 2.0.x for Anycubic 4Max Pro
+# Marlin 2.0.5.4 for Anycubic 4Max Pro 2.0 (new version 2020)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg?style=flat&color=blue)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYDQNE7EAQH3G&source=url)
 [![Forum](https://img.shields.io/badge/Social-Forum-blue.svg)](https://drucktipps3d.de/forum/topic/anycubic-4max-pro)
@@ -11,7 +11,7 @@
 [![Travis CI](https://api.travis-ci.org/Poket-Jony/Marlin-A4MaxPro-2.0.x.svg?branch=master)](https://travis-ci.org/Poket-Jony/Marlin-A4MaxPro-2.0.x)
 
 
-This is the newest version of the [Marlin Firmware](https://github.com/MarlinFirmware/Marlin), customized and optimized for the 4Max Pro based on [davidramiro](https://github.com/davidramiro/Marlin-Ai3M-2.0.x), [derhopp](https://github.com/derhopp/Marlin-with-Anycubic-i3-Mega-TFT) and [alfrank](https://drucktipps3d.de/forum/topic/anycubic-4max-pro-marlin-1-1-9-firmware-ai3m-basierend/) changes.
+This is the [Marlin Firmware](https://github.com/MarlinFirmware/Marlin), customized and optimized for the 4Max Pro based on [Poket Jony](https://github.com/Poket-Jony/Marlin-A4MaxPro-2.0.x), [davidramiro](https://github.com/davidramiro/Marlin-Ai3M-2.0.x), [derhopp](https://github.com/derhopp/Marlin-with-Anycubic-i3-Mega-TFT) and [alfrank](https://drucktipps3d.de/forum/topic/anycubic-4max-pro-marlin-1-1-9-firmware-ai3m-basierend/) changes.
 
 ## Why should use this firmware?
 Anycubic's touchscreen implementation is very hacked together and is based on the old Marlin beta version 1.1.0-RC8.
