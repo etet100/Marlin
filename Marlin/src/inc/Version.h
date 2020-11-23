@@ -28,13 +28,18 @@
   #define SHORT_BUILD_VERSION "2.0.5.4"
 #endif
 
-/**
- * Verbose version identifier containing a unique identifier, such as the
- * vendor name, download location, GitHub account, etc.
+  /**
+   * Verbose version identifier which should contain a reference to the location
+   * from where the binary was downloaded or the source code was compiled.
+   */
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Poket-Jony, Github)"
+
+  /**
+ * Defines the version of the Marlin-A4MaxPro build. Not to be confused with
+ * Marlin's own build number, e.g. 2.0.x.
+ * (Max displayable length = 8)
  */
-#ifndef DETAILED_BUILD_VERSION
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (GitHub)"
-#endif
+ #define CUSTOM_BUILD_VERSION "2.1.10"
 
 /**
  * The STRING_DISTRIBUTION_DATE represents when the binary file was built,
@@ -42,7 +47,7 @@
  * version was tagged.
  */
 #ifndef STRING_DISTRIBUTION_DATE
-  #define STRING_DISTRIBUTION_DATE "2020-07-09"
+  #define STRING_DISTRIBUTION_DATE "2020-07-17"
 #endif
 
 /**
@@ -69,27 +74,25 @@
   #define PROTOCOL_VERSION "1.0"
 #endif
 
-/**
- * Define a generic printer name to be output to the LCD after booting Marlin.
- */
-#ifndef MACHINE_NAME
-  #define MACHINE_NAME "3D Printer"
-#endif
+  /**
+   * Defines a generic printer name to be output to the LCD after booting Marlin.
+   */
+  #define MACHINE_NAME "Anycubic 4Max Pro"
 
-/**
- * Website where users can find Marlin source code for the binary installed on the
- * device. Override this if you provide public source code download. (GPLv3 requires
- * providing the source code to your customers.)
- */
-#ifndef SOURCE_CODE_URL
-  #define SOURCE_CODE_URL "https://github.com/MarlinFirmware/Marlin"
-#endif
+  /**
+   * The SOURCE_CODE_URL is the location where users will find the Marlin Source
+   * Code which is installed on the device. In most cases —unless the manufacturer
+   * has a distinct Github fork— the Source Code URL should just be the main
+   * Marlin repository.
+   */
+  #define SOURCE_CODE_URL "https://github.com/Poket-Jony/Marlin-A4MaxPro-2.0.x"
 
 /**
  * Default generic printer UUID.
+ * f04e5c1a-94e3-49f2-b656-8afacbaba04f => A4MaxPro
  */
 #ifndef DEFAULT_MACHINE_UUID
-  #define DEFAULT_MACHINE_UUID "cede2a2f-41a2-4748-9b12-c55c62f367ff"
+  #define DEFAULT_MACHINE_UUID "f04e5c1a-94e3-49f2-b656-8afacbaba04f"
 #endif
 
   /**

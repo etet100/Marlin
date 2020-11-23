@@ -762,6 +762,8 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         M810_819(); break;                                        // M810-M819: Define/execute G-code macro
       #endif
 
+      case 888: M888(); break;                                    // M888: Ultrabase cooldown (EXPERIMENTAL)
+      
       #if HAS_BED_PROBE
         case 851: M851(); break;                                  // M851: Set Z Probe Z Offset
       #endif

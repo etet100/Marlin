@@ -2072,7 +2072,8 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
   + ENABLED(DGUS_LCD_UI_HIPRECY) \
   + ENABLED(MALYAN_LCD) \
   + ENABLED(TOUCH_UI_FTDI_EVE) \
-  + ENABLED(FSMC_GRAPHICAL_TFT)
+  + ENABLED(FSMC_GRAPHICAL_TFT) \
+  + ENABLED(DWIN_TFT)
   #error "Please select no more than one LCD controller option."
 #endif
 

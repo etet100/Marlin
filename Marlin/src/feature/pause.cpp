@@ -517,6 +517,7 @@ void wait_for_confirmation(const bool is_reload/*=false*/, const int8_t max_beep
     // Wait for the user to press the button to re-heat the nozzle, then
     // re-heat the nozzle, re-show the continue prompt, restart idle timers, start over
     if (nozzle_timed_out) {
+
       #if HAS_LCD_MENU
         lcd_pause_show_message(PAUSE_MESSAGE_HEAT);
       #endif
@@ -606,6 +607,7 @@ void resume_print(const float &slow_load_length/*=0*/, const float &fast_load_le
 
   // Re-enable the heaters if they timed out
   bool nozzle_timed_out = false;
+
   HOTEND_LOOP() {
     nozzle_timed_out |= thermalManager.hotend_idle[e].timed_out;
     thermalManager.reset_hotend_idle_timer(e);

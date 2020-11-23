@@ -87,9 +87,12 @@ void GcodeSuite::M104() {
     #endif
   }
 
+
+
   #if ENABLED(AUTOTEMP)
     planner.autotemp_M104_M109();
   #endif
+
 }
 
 /**
@@ -145,6 +148,10 @@ void GcodeSuite::M109() {
 
   if (set_temp)
     (void)thermalManager.wait_for_hotend(target_extruder, no_wait_for_cooling);
+
+  // flush the serial buffer after heating to prevent lockup by m105
+  //SERIAL_FLUSH();
+
 }
 
 #endif // EXTRUDERS

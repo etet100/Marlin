@@ -79,6 +79,7 @@
     #if HAS_LCD_MENU
       ui.reset_status();
     #endif
+
   }
 
 #endif // ENABLED(PSU_CONTROL)

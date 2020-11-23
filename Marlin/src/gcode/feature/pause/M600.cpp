@@ -61,6 +61,8 @@
  */
 void GcodeSuite::M600() {
 
+  xyz_pos_t park_point = NOZZLE_PARK_POINT;
+
   #if ENABLED(MIXING_EXTRUDER)
     const int8_t target_e_stepper = get_target_e_stepper_from_command();
     if (target_e_stepper < 0) return;
@@ -117,8 +119,6 @@ void GcodeSuite::M600() {
       + (PAUSE_PARK_RETRACT_LENGTH)
     #endif
   );
-
-  xyz_pos_t park_point NOZZLE_PARK_POINT;
 
   // Lift Z axis
   if (parser.seenval('Z')) park_point.z = parser.linearval('Z');
