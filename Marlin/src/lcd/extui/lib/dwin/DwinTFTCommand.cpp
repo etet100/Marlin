@@ -155,6 +155,9 @@ void DwinTFTCommandClass::handleCommand(DwinTFTCommandsRx command)
     case DWIN_TFT_RX_LEVELING_ASSIST: 
       handleLevelingAssist();
       break;
+    case DWIN_TFT_RX_CURRENT_FILE:
+      handleGetCurrentFile();      
+      break;
     default:
       break;
   }
@@ -226,6 +229,13 @@ void DwinTFTCommandClass::handleLevelingAssist()
     if(codeSeen('H') || codeSeen('I') || codeSeen('J') || codeSeen('K')) {
         DwinTFT.nextLevellingAssistPoint();
     }    
+}
+
+void DwinTFTCommandClass::handleGetCurrentFile()
+{
+  DWIN_TFT_SERIAL_PROTOCOLPGM(DWIN_TFT_TX_CURRENT_FILE);
+  DWIN_TFT_SERIAL_PROTOCOLPGM("test123.gcode");
+  DWIN_TFT_SERIAL_ENTER();
 }
 
 void DwinTFTCommandClass::handleGetHotendTemp()

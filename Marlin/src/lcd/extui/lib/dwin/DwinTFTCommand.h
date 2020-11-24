@@ -63,7 +63,8 @@ enum DwinTFTCommandsRx : uint8_t {
   DWIN_TFT_RX_GET_VERSION_INFO = 33,
   DWIN_TFT_RX_RESET_MAINBOARD = 40,
   DWIN_TFT_RX_AUTO_POWER_OFF = 41,
-  DWIN_TFT_RX_SET_CASE_LED = 42
+  DWIN_TFT_RX_SET_CASE_LED = 42, 
+  DWIN_TFT_RX_CURRENT_FILE = 81
 };
 
 #define DWIN_TFT_TX_SD_CARD_INSERTED "J00" //Status: SD Card inserted
@@ -102,6 +103,7 @@ enum DwinTFTCommandsRx : uint8_t {
 #define DWIN_TFT_TX_HOTBED_TEMP "A2V "
 #define DWIN_TFT_TX_HOTEND_TARGET_TEMP "A1V "
 #define DWIN_TFT_TX_HOTEND_TEMP "A0V "
+#define DWIN_TFT_TX_CURRENT_FILE "A81V "
 
 #define DWIN_TFT_RX_CODE_ENABLE 'O'
 #define DWIN_TFT_RX_CODE_DISABLE 'C'
@@ -155,6 +157,7 @@ private:
   void handleAutoPowerOff();
   void handleSetCaseLight();
   void handleLevelingAssist();
+  void handleGetCurrentFile();
 };
 
 extern DwinTFTCommandClass DwinTFTCommand;
