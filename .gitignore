@@ -184,3 +184,5 @@ cmake-build-*
 
 #Python
 __pycache__
+
+!/Marlin_TFT_4MAXPRO_V1.3.1_0512.ino.hex
