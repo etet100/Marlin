@@ -147,13 +147,11 @@ void DwinTFTFileBrowserClass::selectFile()
     card.openFileRead(selectedFilename);
     if(card.isFileOpen()) {
       DWIN_TFT_SERIAL_PROTOCOLPGM(DWIN_TFT_TX_SD_CARD_OPEN_SUCCESS); // J20 Open successful
-      DWIN_TFT_SERIAL_ENTER();
       #ifdef DWIN_TFT_DEBUG
         SERIAL_ECHOLNPGM("TFT Serial Debug: File open successful... J20");
       #endif
     } else {
       DWIN_TFT_SERIAL_PROTOCOLPGM(DWIN_TFT_TX_SD_CARD_OPEN_FAILED); // J21 Open failed
-      DWIN_TFT_SERIAL_ENTER();
       #ifdef DWIN_TFT_DEBUG
         SERIAL_ECHOLNPGM("TFT Serial Debug: File open failed... J21");
       #endif
