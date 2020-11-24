@@ -23,7 +23,6 @@
 #include "DwinTFT.h"
 
 #define DWIN_TFT_BAUDRATE 115200
-#define DWIN_TFT_BUFSIZE 4
 #define DWIN_TFT_MAX_CMD_SIZE 96
 
 enum DwinTFTCommandsRx : uint8_t {
@@ -64,6 +63,7 @@ enum DwinTFTCommandsRx : uint8_t {
   DWIN_TFT_RX_RESET_MAINBOARD = 40,
   DWIN_TFT_RX_AUTO_POWER_OFF = 41,
   DWIN_TFT_RX_SET_CASE_LED = 42, 
+  DWIN_TFT_RX_UNKNOWN_50 = 50, // P: J17, J12, J00, D: A41 S, A50 S, J35 ???
   DWIN_TFT_RX_CURRENT_FILE = 81
 };
 
@@ -119,12 +119,9 @@ public:
   void loop();
 
 private:
-  char TFTcmdbuffer[DWIN_TFT_BUFSIZE][DWIN_TFT_MAX_CMD_SIZE];
+  char TFTcmdbuffer[DWIN_TFT_MAX_CMD_SIZE];
   int TFTbuflen = 0;
-  int TFTbufindr = 0;
-  int TFTbufindw = 0;
-  char serial3_char;
-  int serial3_count = 0;
+  int TFTbufpos = 0;
   void receiveCommands();
   void handleGetHotendTemp();
   void handleGetHotendTargetTemp();

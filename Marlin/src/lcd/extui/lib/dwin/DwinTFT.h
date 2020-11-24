@@ -24,7 +24,7 @@
 
 #include "DwinTFTBuzzer.h"
 
-#define DWIN_TFT_UPDATE_INTERVAL_MS 250
+#define DWIN_TFT_UPDATE_INTERVAL_MS 150
 
 char *itostr2(const uint8_t &x);
 

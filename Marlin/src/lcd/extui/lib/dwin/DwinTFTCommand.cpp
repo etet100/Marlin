@@ -165,60 +165,55 @@ void DwinTFTCommandClass::handleCommand(DwinTFTCommandsRx command)
 
 float DwinTFTCommandClass::codeValue()
 {
-  return (strtod(&TFTcmdbuffer[TFTbufindr][TFTstrchr_pointer - TFTcmdbuffer[TFTbufindr] + 1], NULL));
+  return (strtod(&TFTcmdbuffer[TFTstrchr_pointer - TFTcmdbuffer + 1], NULL));
 }
 
 bool DwinTFTCommandClass::codeSeen(char code)
 {
-  TFTstrchr_pointer = strchr(TFTcmdbuffer[TFTbufindr], code);
+  TFTstrchr_pointer = strchr(TFTcmdbuffer, code);
   return (TFTstrchr_pointer != NULL); //Return True if a character was found
 }
 
 void DwinTFTCommandClass::receiveCommands()
 {
-  while( DwinTFTSerial.available() > 0  && TFTbuflen < DWIN_TFT_BUFSIZE)
-  {
-    serial3_char = DwinTFTSerial.read();
-    if(serial3_char == '\n' || serial3_char == '\r' || serial3_char == ':'  || serial3_count >= (DWIN_TFT_MAX_CMD_SIZE - 1) )
+  while(DwinTFTSerial.available())
+  {  
+    char serial3_char = DwinTFTSerial.read();
+
+    if(serial3_char == '\n' || serial3_char == '\r' || TFTbufpos >= (DWIN_TFT_MAX_CMD_SIZE - 1) )
     {
-      if(!serial3_count) { //if empty line
+      if(!TFTbufpos) { //if empty line
         return;
       }
 
-      TFTcmdbuffer[TFTbufindw][serial3_count] = 0; //terminate string
+      TFTcmdbuffer[TFTbufpos] = 0; //terminate string
 
-      if((strchr(TFTcmdbuffer[TFTbufindw], 'A') != NULL)) {
+      if((strchr(TFTcmdbuffer, 'A') != NULL)) {
         int16_t a_command;
-        TFTstrchr_pointer = strchr(TFTcmdbuffer[TFTbufindw], 'A');
-        a_command = ((int)((strtod(&TFTcmdbuffer[TFTbufindw][TFTstrchr_pointer - TFTcmdbuffer[TFTbufindw] + 1], NULL))));
+        TFTstrchr_pointer = strchr(TFTcmdbuffer, 'A');
+        a_command = ((int)((strtod(&TFTcmdbuffer[TFTstrchr_pointer - TFTcmdbuffer + 1], NULL))));
 
         #ifdef DWIN_TFT_DEBUG
-          if ((a_command>7) && (a_command != 20)) // No debugging of status polls, please!
-          SERIAL_ECHOLNPAIR("TFT Serial Command: ", TFTcmdbuffer[TFTbufindw]);
+          // No debugging of status polls, please!
+          if ((a_command>7) && (a_command != 20)) {
+            SERIAL_ECHOLNPAIR("TFT Serial Command: ", TFTcmdbuffer);
+          }
         #endif
 
         handleCommand((DwinTFTCommandsRx)a_command);
       }
-      TFTbufindw = (TFTbufindw + 1) % DWIN_TFT_BUFSIZE;
-      TFTbuflen += 1;
-      serial3_count = 0; //clear buffer
+      TFTbufpos = 0; //clear buffer
     }
     else
     {
-      TFTcmdbuffer[TFTbufindw][serial3_count++] = serial3_char;
+      TFTcmdbuffer[TFTbufpos++] = serial3_char;
     }
   }
 }
 
 void DwinTFTCommandClass::loop()
 {
-  if(TFTbuflen<(DWIN_TFT_BUFSIZE-1)) {
-    receiveCommands();
-  }
-  if(TFTbuflen) {
-    TFTbuflen = (TFTbuflen - 1);
-    TFTbufindr = (TFTbufindr + 1) % DWIN_TFT_BUFSIZE;
-  }
+  receiveCommands();
 }
 
 void DwinTFTCommandClass::handleLevelingAssist()
