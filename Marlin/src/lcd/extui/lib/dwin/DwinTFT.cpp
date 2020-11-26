@@ -111,9 +111,8 @@ void DwinTFTClass::init()
 
   #ifdef STARTUP_CHIME
     playTone(250, NOTE_C5);
+    playTone(250, 0);
     playTone(250, NOTE_F5);
-    playTone(250, NOTE_C5);
-    playTone(500, NOTE_G5);
   #endif
 
   leveling = false;
