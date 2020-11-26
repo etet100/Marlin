@@ -43,6 +43,15 @@ void DwinTFTFileBrowserClass::reset()
   selectedDirectory[0] = '\0';
 }
 
+void DwinTFTFileBrowserClass::sendCurrentFile()
+{
+  DWIN_TFT_SERIAL_PROTOCOL(selectedFilename);
+  #ifdef DWIN_TFT_DEBUG
+    SERIAL_ECHOPGM("TFT Serial Debug: Current file is ");
+    SERIAL_ECHOLN(selectedFilename);
+  #endif
+}
+
 void DwinTFTFileBrowserClass::listFiles()
 {
   if(!ExtUI::isMediaInserted()) {

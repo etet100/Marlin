@@ -229,7 +229,9 @@ void DwinTFTCommandClass::handleLevelingAssist()
 void DwinTFTCommandClass::handleGetCurrentFile()
 {
   DWIN_TFT_SERIAL_PROTOCOLPGM(DWIN_TFT_TX_CURRENT_FILE);
-  DWIN_TFT_SERIAL_PROTOCOLPGM("test123.gcode");
+  #ifdef SDSUPPORT
+    DwinTFTFileBrowser.sendCurrentFile();
+  #endif
   DWIN_TFT_SERIAL_ENTER();
 }
 

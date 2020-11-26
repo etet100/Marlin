@@ -44,6 +44,8 @@
 #define DEBUG_MENU_TEST_DISPLAY_TX_COMMANDS "<test display tx commands>"
 #define DEBUG_MENU_TEST_DISPLAY_INTERACTION "<test display interaction>"
 
+#define MAX_FILENAME_LENGTH 27
+
 class DwinTFTFileBrowserClass {
 private:
   uint8_t debugDisplayTxCommand = 0;
@@ -57,6 +59,7 @@ public:
   DwinTFTFileBrowserClass();
   void reset();
   void listFiles();
+  void sendCurrentFile();
   void selectFile();
   void refreshFileList();
 };
